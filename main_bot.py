@@ -42,15 +42,23 @@ def text_handler(message):
 		msg = bot.send_message(message.chat.id, 'Здесь должны быть ответы на часто задаваемые вопросы оплаты',reply_markup=markup)
 	elif message.text == 'Узнать свой последний рейтинг':
 		msg = bot.send_message(message.chat.id, 'Какой ваш ID?')
-		bot.register_next_step_handler(msg,text_jpg)
+		try:
+			bot.register_next_step_handler(msg,text_jpg)
+		except:
+			bot.send_message(message.chat.id, "Student.kazgasa.kz временно недоступен")
+		else:
+			bot.send_message(message.chat.id, "Student.kazgasa.kz недоступен")
 	elif message.text == 'Расписание занятий(exc)':
-		doc = open('table_fos.xlsx','rb')
+		doc = open('table_fos.xls','rb')
 		bot.send_document(message.chat.id, doc,reply_markup=markup)
 		bot.send_message(message.chat.id,'so far only fos and fstim. If you have the latest schedule. Click on the FAQ and write to me')
 		doc.close()
 	elif message.text == 'Транскрипт':
 		msg = bot.send_message(message.chat.id, 'Какой ваш ID?')
-		bot.register_next_step_handler(msg,trans_jpg)
+		try:
+			bot.register_next_step_handler(msg,trans_jpg)
+		except:
+			bot.send_message(message.chat.id, "Сайт Student.kazgasa.kz временно недоступен, вернитесь позже")	
 	else:
 		help(message)
 
